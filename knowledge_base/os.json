@@ -1,0 +1,480 @@
+{
+  "subject_id": "OS",
+  "subject_name": "Operating Systems",
+  "version": "1.0-condensed",
+  "source_note": "Compiled standard undergraduate OS curriculum",
+  "total_topics": 17,
+  "total_hours": 70,
+  "meta": {
+    "revision_intervals_days": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ],
+    "mastery_levels": [
+      "not_started",
+      "learning",
+      "practicing",
+      "revision_needed",
+      "mastered"
+    ],
+    "mastery_rule": "mastered = two assessments on different days scoring >= 0.8; drop to revision_needed if a revision scores < 0.7",
+    "prerequisite_rule": "start a topic only when all prerequisites are mastered, or practicing with latest score >= 0.7",
+    "question_weights": {"easy": 1, "medium": 2, "hard": 3}
+  },
+  "topics": [
+    {
+      "topic_id": "OS_INTRO",
+      "name": "Introduction to Operating Systems",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+
+      ],
+      "definition": "Software managing hardware resources and giving services to applications",
+      "concepts": [
+        "resource management",
+        "abstraction",
+        "multiprogramming vs multitasking",
+        "kernel structures (monolithic, microkernel, hybrid)"
+      ],
+      "common_mistakes": [
+        "equating OS with UI",
+        "multiprogramming = multitasking",
+        "kernel is the whole OS"
+      ],
+      "questions": [
+        {"q": "Three OS responsibilities?", "a": "Process, memory, file/device management, protection"},
+        {"q": "Multiprogramming vs multitasking?", "a": "Multiprogramming overlaps CPU and I/O (utilization); multitasking time-slices for responsiveness"}
+      ]
+    },
+    {
+      "topic_id": "OS_SYSCALLS_MODES",
+      "name": "System Calls and User/Kernel Mode",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "OS_INTRO"
+      ],
+      "definition": "Controlled entry from user programs into privileged kernel code",
+      "concepts": [
+        "privilege levels",
+        "trap/software interrupt",
+        "system call table",
+        "mode switch cost"
+      ],
+      "common_mistakes": [
+        "every library call is a syscall",
+        "ignoring mode-switch cost",
+        "interrupt vs trap"
+      ],
+      "questions": [
+        {"q": "Why no privileged instructions in user mode?", "a": "Protects OS and other programs; hardware mode bit"},
+        {"q": "What happens on write()?", "a": "Library sets args and syscall number, trap, kernel mode, validate, execute, return to user mode"}
+      ]
+    },
+    {
+      "topic_id": "OS_PROCESSES_THREADS",
+      "name": "Processes and Threads",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "OS_INTRO"
+      ],
+      "definition": "Process is a program in execution with own address space; thread is an execution unit inside it",
+      "concepts": [
+        "PCB",
+        "address space (text, data, heap, stack)",
+        "shared vs private thread resources",
+        "user vs kernel threads"
+      ],
+      "common_mistakes": [
+        "threads have separate heaps",
+        "program vs process",
+        "more threads always faster"
+      ],
+      "questions": [
+        {"q": "Threads of a process share?", "a": "Code, data, heap, open files; own stack, registers, PC"},
+        {"q": "fork() returns?", "a": "Child PID to parent, 0 to child, negative on failure"}
+      ]
+    },
+    {
+      "topic_id": "OS_PROCESS_STATES_CONTEXT",
+      "name": "Process States and Context Switching",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "OS_PROCESSES_THREADS"
+      ],
+      "definition": "Life cycle of a process and saving/restoring CPU state",
+      "concepts": [
+        "new/ready/running/waiting/terminated",
+        "dispatcher",
+        "context save/restore",
+        "cache and TLB effects"
+      ],
+      "common_mistakes": [
+        "blocked to running directly",
+        "treating switch as useful work",
+        "scheduler vs dispatcher"
+      ],
+      "questions": [
+        {"q": "Running process requests I/O?", "a": "Running to waiting"},
+        {"q": "Saved in context switch?", "a": "Registers, PC, stack pointer, memory-management info in PCB"}
+      ]
+    },
+    {
+      "topic_id": "OS_CPU_SCHEDULING",
+      "name": "CPU Scheduling Algorithms",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 6,
+      "prerequisites": [
+        "OS_PROCESS_STATES_CONTEXT"
+      ],
+      "definition": "Policies choosing the next ready process",
+      "concepts": [
+        "preemptive vs non-preemptive",
+        "time quantum",
+        "convoy effect",
+        "starvation and aging",
+        "FCFS, SJF, SRTF, Priority, RR"
+      ],
+      "common_mistakes": [
+        "turnaround vs waiting confusion",
+        "ignoring arrival times",
+        "tiny quantum ignoring switch cost"
+      ],
+      "questions": [
+        {"q": "FCFS P1(0,5) P2(1,3) P3(2,1) avg wait?", "a": "10/3 = 3.33"},
+        {"q": "Same, non-preemptive SJF?", "a": "8/3 = 2.67"},
+        {"q": "RR q=2, all arrive 0, bursts 5,3,1 avg wait?", "a": "13/3 = 4.33"}
+      ]
+    },
+    {
+      "topic_id": "OS_IPC",
+      "name": "Inter-Process Communication",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 3,
+      "prerequisites": [
+        "OS_PROCESSES_THREADS"
+      ],
+      "definition": "Mechanisms for processes to exchange data and coordinate",
+      "concepts": [
+        "shared memory",
+        "message passing",
+        "pipes and FIFOs",
+        "sockets and signals"
+      ],
+      "common_mistakes": [
+        "shared memory needs no sync",
+        "pipe vs named pipe",
+        "ignoring blocking"
+      ],
+      "questions": [
+        {"q": "Shared memory vs message passing speed?", "a": "Shared memory faster after setup, needs synchronization"},
+        {"q": "Related processes streaming bytes?", "a": "Anonymous pipe"}
+      ]
+    },
+    {
+      "topic_id": "OS_SYNCHRONIZATION",
+      "name": "Process Synchronization and Critical Section",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "OS_PROCESSES_THREADS",
+        "OS_PROCESS_STATES_CONTEXT"
+      ],
+      "definition": "Coordinating shared data access so results are interleaving-independent",
+      "concepts": [
+        "race condition",
+        "critical section",
+        "mutual exclusion, progress, bounded waiting",
+        "test-and-set / compare-and-swap",
+        "Peterson"
+      ],
+      "common_mistakes": [
+        "calling long code critical",
+        "disabling interrupts on multiprocessors",
+        "ignoring memory ordering"
+      ],
+      "questions": [
+        {"q": "Three CS requirements?", "a": "Mutual exclusion, progress, bounded waiting"},
+        {"q": "Why counter++ x2 threads loses updates?", "a": "Read-modify-write interleaves, lost update"}
+      ]
+    },
+    {
+      "topic_id": "OS_SYNC_PRIMITIVES",
+      "name": "Mutexes, Semaphores, Monitors, Classic Problems",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 6,
+      "prerequisites": [
+        "OS_SYNCHRONIZATION"
+      ],
+      "definition": "High-level sync tools and standard problems",
+      "concepts": [
+        "wait/signal",
+        "mutex ownership",
+        "condition variables",
+        "monitor",
+        "producer-consumer, readers-writers, dining philosophers"
+      ],
+      "common_mistakes": [
+        "reversed wait order deadlocks",
+        "signal before wait",
+        "mutex = binary semaphore"
+      ],
+      "questions": [
+        {"q": "Mutex vs binary semaphore?", "a": "Mutex has an owner who must unlock; semaphore is signaling without ownership"},
+        {"q": "Bounded buffer?", "a": "empty=N, full=0, mutex=1; producer: wait(empty), wait(mutex), insert, signal(mutex), signal(full)"}
+      ]
+    },
+    {
+      "topic_id": "OS_DEADLOCKS",
+      "name": "Deadlocks and Handling",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "OS_SYNC_PRIMITIVES"
+      ],
+      "definition": "Processes wait forever for resources held by each other",
+      "concepts": [
+        "Coffman conditions",
+        "resource allocation graph",
+        "safe state",
+        "Banker's algorithm"
+      ],
+      "common_mistakes": [
+        "unsafe = deadlock",
+        "forgetting all four must hold",
+        "need = max + allocation"
+      ],
+      "questions": [
+        {"q": "Four conditions?", "a": "Mutual exclusion, hold and wait, no preemption, circular wait"},
+        {"q": "Total 10; alloc 3,2,2; max 9,4,7: safe?", "a": "Safe: P1,P2,P0 (need = max - alloc; available=3)"}
+      ]
+    },
+    {
+      "topic_id": "OS_MEMORY_MANAGEMENT",
+      "name": "Memory Management Basics",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 4,
+      "prerequisites": [
+        "OS_PROCESSES_THREADS"
+      ],
+      "definition": "Allocating and protecting main memory",
+      "concepts": [
+        "logical vs physical address",
+        "base and limit",
+        "fragmentation",
+        "first/best/worst fit",
+        "compaction"
+      ],
+      "common_mistakes": [
+        "swapping internal/external definitions",
+        "best fit always best",
+        "ignoring metadata"
+      ],
+      "questions": [
+        {"q": "Internal vs external fragmentation?", "a": "Wasted space inside block vs scattered unusable free holes"},
+        {"q": "Holes 100,500,200,300,600 request 212 first/best fit?", "a": "500K and 300K"}
+      ]
+    },
+    {
+      "topic_id": "OS_PAGING_SEGMENTATION",
+      "name": "Paging and Segmentation",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "OS_MEMORY_MANAGEMENT"
+      ],
+      "definition": "Non-contiguous allocation with fixed pages or logical segments",
+      "concepts": [
+        "page, frame, page table",
+        "TLB",
+        "multilevel page tables",
+        "segmentation"
+      ],
+      "common_mistakes": [
+        "decimal instead of bit split",
+        "forgetting extra memory access on TLB miss",
+        "page size vs frame number"
+      ],
+      "questions": [
+        {"q": "4 KB page, address 0x3A7C?", "a": "Page 3, offset 0xA7C"},
+        {"q": "TLB hit 90%, TLB 10ns, mem 100ns EAT?", "a": "120 ns"}
+      ]
+    },
+    {
+      "topic_id": "OS_VIRTUAL_MEMORY",
+      "name": "Virtual Memory",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "OS_PAGING_SEGMENTATION"
+      ],
+      "definition": "Large address space illusion by keeping only needed pages in RAM",
+      "concepts": [
+        "demand paging",
+        "page fault steps",
+        "locality of reference",
+        "thrashing and working set",
+        "copy-on-write"
+      ],
+      "common_mistakes": [
+        "page fault always an error",
+        "ignoring fault service dominance",
+        "more multiprogramming always better"
+      ],
+      "questions": [
+        {"q": "Mem 200ns, fault service 8ms, rate 1/1000 EAT?", "a": "about 8199.8 ns"},
+        {"q": "Thrashing?", "a": "More time paging than executing, due to too few frames per working set"}
+      ]
+    },
+    {
+      "topic_id": "OS_PAGE_REPLACEMENT",
+      "name": "Page Replacement Algorithms",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "OS_VIRTUAL_MEMORY"
+      ],
+      "definition": "Choosing which resident page to evict on fault",
+      "concepts": [
+        "reference string",
+        "FIFO, LRU, Optimal",
+        "Belady's anomaly",
+        "Clock/second chance"
+      ],
+      "common_mistakes": [
+        "LRU recency on hits",
+        "inconsistent initial loads",
+        "Belady affects LRU"
+      ],
+      "questions": [
+        {"q": "String 7,0,1,2,0,3,0,4,2,3,0,3,2 with 3 frames FIFO/LRU?", "a": "10 and 9"},
+        {"q": "FIFO 1,2,3,4,1,2,5,1,2,3,4,5: 3 vs 4 frames?", "a": "9 vs 10 (Belady)"}
+      ]
+    },
+    {
+      "topic_id": "OS_FILE_SYSTEMS",
+      "name": "File Systems",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": [
+        "OS_MEMORY_MANAGEMENT"
+      ],
+      "definition": "Persistent storage organisation into files and directories",
+      "concepts": [
+        "allocation (contiguous, linked, indexed)",
+        "inode",
+        "free-space management",
+        "journaling"
+      ],
+      "common_mistakes": [
+        "file name vs inode",
+        "contiguous fragmentation",
+        "delete erases data"
+      ],
+      "questions": [
+        {"q": "What does an inode hold?", "a": "Metadata and block pointers, not file name"},
+        {"q": "Random access by allocation?", "a": "Contiguous fast, linked poor, indexed good"}
+      ]
+    },
+    {
+      "topic_id": "OS_DISK_SCHEDULING",
+      "name": "Disk Scheduling",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 3,
+      "prerequisites": [
+        "OS_FILE_SYSTEMS"
+      ],
+      "definition": "Ordering disk requests to cut seek time",
+      "concepts": [
+        "seek time",
+        "rotational latency",
+        "FCFS, SSTF, SCAN, C-SCAN, LOOK",
+        "elevator algorithm"
+      ],
+      "common_mistakes": [
+        "LOOK going to disk end",
+        "wrong initial direction",
+        "inconsistent C-SCAN return"
+      ],
+      "questions": [
+        {"q": "Head 50; 82,170,43,140,24,16,190 FCFS?", "a": "642"},
+        {"q": "Same under SSTF?", "a": "208"}
+      ]
+    },
+    {
+      "topic_id": "OS_IO_MANAGEMENT",
+      "name": "I/O Management",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 3,
+      "prerequisites": [
+        "OS_SYSCALLS_MODES",
+        "OS_PROCESS_STATES_CONTEXT"
+      ],
+      "definition": "How the OS talks to devices via controllers, drivers, interrupts",
+      "concepts": [
+        "polling vs interrupts",
+        "DMA",
+        "buffering, caching, spooling",
+        "blocking vs non-blocking"
+      ],
+      "common_mistakes": [
+        "polling always worse",
+        "buffer vs cache confusion",
+        "CPU role in programmed I/O"
+      ],
+      "questions": [
+        {"q": "How does DMA help?", "a": "Controller moves blocks directly to memory, interrupts CPU only at the end"},
+        {"q": "Buffer vs cache?", "a": "Buffer holds data in transit; cache holds copies for reuse"}
+      ]
+    },
+    {
+      "topic_id": "OS_PROTECTION_SECURITY",
+      "name": "Protection and Security Fundamentals",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 3,
+      "prerequisites": [
+        "OS_SYSCALLS_MODES",
+        "OS_FILE_SYSTEMS"
+      ],
+      "definition": "Controlling resource access and defending against attacks",
+      "concepts": [
+        "protection domains",
+        "ACLs and capabilities",
+        "least privilege",
+        "authentication vs authorization"
+      ],
+      "common_mistakes": [
+        "confusing authn and authz",
+        "security only encryption",
+        "broad permissions"
+      ],
+      "questions": [
+        {"q": "Authentication vs authorization?", "a": "Verify identity vs decide permitted actions"},
+        {"q": "Unix 754?", "a": "Owner rwx, group r-x, others r--"}
+      ]
+    }
+  ]
+}

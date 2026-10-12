@@ -1,0 +1,513 @@
+{
+  "subject_id": "CN",
+  "subject_name": "Computer Networks",
+  "version": "1.0-condensed",
+  "source_note": "Compiled standard undergraduate CN curriculum",
+  "total_topics": 18,
+  "total_hours": 69,
+  "meta": {
+    "revision_intervals_days": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ],
+    "mastery_levels": [
+      "not_started",
+      "learning",
+      "practicing",
+      "revision_needed",
+      "mastered"
+    ],
+    "mastery_rule": "mastered = two assessments on different days scoring >= 0.8; drop to revision_needed if a revision scores < 0.7",
+    "prerequisite_rule": "start a topic only when all prerequisites are mastered, or practicing with latest score >= 0.7",
+    "question_weights": {"easy": 1, "medium": 2, "hard": 3}
+  },
+  "topics": [
+    {
+      "topic_id": "CN_FUNDAMENTALS",
+      "name": "Networking Fundamentals",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+
+      ],
+      "definition": "Links, nodes, topologies, switching methods, network types",
+      "concepts": [
+        "nodes and links",
+        "packet switching vs circuit switching",
+        "topology",
+        "LAN/MAN/WAN"
+      ],
+      "common_mistakes": [
+        "Internet vs Web",
+        "one fixed path",
+        "bandwidth vs propagation speed"
+      ],
+      "questions": [
+        {"q": "Why packet switching on the Internet?", "a": "Shares links among bursty users without dedicated circuits"},
+        {"q": "Unicast, multicast, broadcast?", "a": "One-to-one, one-to-group, one-to-all"}
+      ]
+    },
+    {
+      "topic_id": "CN_MODELS",
+      "name": "OSI and TCP/IP Models",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "CN_FUNDAMENTALS"
+      ],
+      "definition": "Layered models defining functions and encapsulation",
+      "concepts": [
+        "layering",
+        "encapsulation",
+        "PDU (bit, frame, packet, segment, data)",
+        "protocol vs service"
+      ],
+      "common_mistakes": [
+        "TLS/ARP layer placement",
+        "OSI maps 1:1 to TCP/IP",
+        "PDU names"
+      ],
+      "questions": [
+        {"q": "PDU at data-link, network, transport?", "a": "Frame, packet, segment/datagram"},
+        {"q": "Router and switch layers?", "a": "L3 and L2"}
+      ]
+    },
+    {
+      "topic_id": "CN_DATALINK_PHYSICAL",
+      "name": "Physical and Data-Link Layers",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 4,
+      "prerequisites": [
+        "CN_MODELS"
+      ],
+      "definition": "Bits over media, frames between adjacent nodes, error detection",
+      "concepts": [
+        "framing",
+        "parity, checksum, CRC",
+        "Hamming overview",
+        "CSMA/CD and CSMA/CA"
+      ],
+      "common_mistakes": [
+        "CRC corrects errors",
+        "hop-by-hop vs end-to-end",
+        "Hz vs bps"
+      ],
+      "questions": [
+        {"q": "Does CRC correct errors?", "a": "No, it detects; correction needs Hamming or retransmission"},
+        {"q": "Why Wi-Fi uses CSMA/CA?", "a": "Cannot detect collisions while transmitting"}
+      ]
+    },
+    {
+      "topic_id": "CN_ETHERNET_MAC",
+      "name": "Ethernet and MAC Addressing",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "CN_DATALINK_PHYSICAL"
+      ],
+      "definition": "LAN technology and 48-bit hardware addresses",
+      "concepts": [
+        "MAC address (OUI + device)",
+        "Ethernet frame",
+        "MAC learning table",
+        "collision vs broadcast domain"
+      ],
+      "common_mistakes": [
+        "MAC routes across Internet",
+        "collision vs broadcast domains",
+        "MAC cannot change"
+      ],
+      "questions": [
+        {"q": "How does a switch learn?", "a": "Records source MAC per ingress port; floods unknown destinations"},
+        {"q": "MAC length?", "a": "48 bits, six hex byte pairs"}
+      ]
+    },
+    {
+      "topic_id": "CN_SWITCHING_ROUTING",
+      "name": "Switching and Routing",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": [
+        "CN_ETHERNET_MAC",
+        "CN_MODELS"
+      ],
+      "definition": "Forwarding frames in a LAN and packets between networks",
+      "concepts": [
+        "forwarding table",
+        "longest prefix match",
+        "default route",
+        "RIP, OSPF, BGP overview"
+      ],
+      "common_mistakes": [
+        "first match not longest",
+        "routing vs forwarding",
+        "ignoring default route"
+      ],
+      "questions": [
+        {"q": "10/8 via A, 10.1/16 via B, 0/0 via C; dest 10.1.5.9?", "a": "Via B (longest prefix)"},
+        {"q": "Distance-vector vs link-state?", "a": "DV shares tables with neighbours (Bellman-Ford); LS floods topology, Dijkstra"}
+      ]
+    },
+    {
+      "topic_id": "CN_IP_ADDRESSING",
+      "name": "IPv4 and IPv6 Addressing",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "CN_SWITCHING_ROUTING"
+      ],
+      "definition": "32-bit IPv4 and 128-bit IPv6 logical addresses",
+      "concepts": [
+        "IPv4 structure and classes",
+        "private ranges",
+        "IPv6 notation",
+        "dual stack and tunneling"
+      ],
+      "common_mistakes": [
+        "classful as current practice",
+        "two :: in IPv6",
+        "forgetting loopback/link-local"
+      ],
+      "questions": [
+        {"q": "Private IPv4 ranges?", "a": "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16"},
+        {"q": "Shorten 2001:0db8:0000:0000:0000:0000:0000:0001", "a": "2001:db8::1"}
+      ]
+    },
+    {
+      "topic_id": "CN_SUBNETTING_CIDR",
+      "name": "Subnetting and CIDR",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "CN_IP_ADDRESSING"
+      ],
+      "definition": "Dividing address space by prefix length",
+      "concepts": [
+        "subnet mask",
+        "CIDR prefix",
+        "block size = 2^(32-p) in interesting octet",
+        "usable hosts 2^h - 2",
+        "VLSM and summarization"
+      ],
+      "common_mistakes": [
+        "not subtracting network/broadcast",
+        "wrong block size",
+        "overlapping VLSM"
+      ],
+      "questions": [
+        {"q": "192.168.10.0/26?", "a": "Mask 255.255.255.192; .1-.62; broadcast .63; 62 hosts"},
+        {"q": "172.16.45.130/27?", "a": "Net .128, broadcast .159, usable .129-.158"},
+        {"q": "Usable hosts in /20?", "a": "4094"}
+      ]
+    },
+    {
+      "topic_id": "CN_ARP_ICMP",
+      "name": "ARP and ICMP",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "CN_IP_ADDRESSING",
+        "CN_ETHERNET_MAC"
+      ],
+      "definition": "ARP maps IP to MAC on a link; ICMP carries control/error messages",
+      "concepts": [
+        "ARP table",
+        "broadcast request, unicast reply",
+        "ICMP echo",
+        "TTL exceeded"
+      ],
+      "common_mistakes": [
+        "ARP crossing routers",
+        "ping uses TCP/UDP",
+        "TTL in traceroute"
+      ],
+      "questions": [
+        {"q": "Host A needs B's MAC?", "a": "Broadcast ARP request, B replies unicast, A caches"},
+        {"q": "How does traceroute work?", "a": "Probes with increasing TTL; routers return ICMP Time Exceeded"}
+      ]
+    },
+    {
+      "topic_id": "CN_TCP_UDP",
+      "name": "TCP and UDP",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "CN_IP_ADDRESSING",
+        "CN_MODELS"
+      ],
+      "definition": "Reliable ordered streams vs lightweight datagrams; ports",
+      "concepts": [
+        "ports and sockets",
+        "reliability (seq, ACK, retransmit)",
+        "connection-oriented vs connectionless",
+        "multiplexing"
+      ],
+      "common_mistakes": [
+        "UDP has no checksum",
+        "TCP guarantees timing",
+        "port vs IP"
+      ],
+      "questions": [
+        {"q": "Apps using UDP / TCP?", "a": "UDP: DNS queries, streaming; TCP: HTTP, SMTP"},
+        {"q": "What identifies a TCP connection?", "a": "Source IP/port + destination IP/port"}
+      ]
+    },
+    {
+      "topic_id": "CN_DHCP_DNS",
+      "name": "DHCP and DNS",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "CN_ARP_ICMP",
+        "CN_TCP_UDP"
+      ],
+      "definition": "DHCP assigns IP config; DNS resolves names",
+      "concepts": [
+        "DORA",
+        "lease",
+        "resolver, root, TLD, authoritative",
+        "A, AAAA, CNAME, MX, NS",
+        "caching and TTL"
+      ],
+      "common_mistakes": [
+        "confusing server roles",
+        "DNS UDP-only (TCP for large)",
+        "ignoring cache"
+      ],
+      "questions": [
+        {"q": "DORA?", "a": "Discover, Offer, Request, Acknowledge"},
+        {"q": "Resolve www.example.com empty cache?", "a": "Resolver asks root, then TLD, then authoritative; caches answer"}
+      ]
+    },
+    {
+      "topic_id": "CN_TCP_CONNECTION",
+      "name": "TCP Connection Establishment and Termination",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 3,
+      "prerequisites": [
+        "CN_TCP_UDP"
+      ],
+      "definition": "Three-way handshake and four-step close",
+      "concepts": [
+        "SYN, SYN-ACK, ACK",
+        "ISN",
+        "FIN and ACK",
+        "TIME_WAIT",
+        "SYN flood"
+      ],
+      "common_mistakes": [
+        "handshake always carries data",
+        "each direction closes separately",
+        "ignoring TIME_WAIT"
+      ],
+      "questions": [
+        {"q": "ISN client 100, server 300?", "a": "SYN seq=100; SYN-ACK seq=300 ack=101; ACK seq=101 ack=301"},
+        {"q": "Why TIME_WAIT?", "a": "Ensure final ACK delivered and old segments expire before 4-tuple reuse"}
+      ]
+    },
+    {
+      "topic_id": "CN_FLOW_CONGESTION",
+      "name": "Flow Control and Congestion Control",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": [
+        "CN_TCP_CONNECTION"
+      ],
+      "definition": "Flow control protects receiver; congestion control protects network",
+      "concepts": [
+        "rwnd and cwnd",
+        "ssthresh",
+        "AIMD, slow start",
+        "Go-Back-N vs Selective Repeat",
+        "utilization = min(1, W/(1+2a))"
+      ],
+      "common_mistakes": [
+        "mixing flow/congestion",
+        "linear slow start",
+        "ignoring propagation delay"
+      ],
+      "questions": [
+        {"q": "Stop-and-wait Tt=1ms, Tp=4ms utilization?", "a": "1/9 = 11.1%"},
+        {"q": "W=4, a=4 utilization?", "a": "4/9 = 44.4%"},
+        {"q": "Flow vs congestion control?", "a": "rwnd limits to receiver capacity; cwnd limits to network; sender uses min"}
+      ]
+    },
+    {
+      "topic_id": "CN_HTTP_HTTPS",
+      "name": "HTTP and HTTPS",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "CN_TCP_UDP",
+        "CN_DHCP_DNS"
+      ],
+      "definition": "Web request-response protocol and TLS variant",
+      "concepts": [
+        "methods and idempotency",
+        "status code classes",
+        "cookies and statelessness",
+        "persistent connections",
+        "HTTP/1.1, 2, 3"
+      ],
+      "common_mistakes": [
+        "HTTP keeps state",
+        "301 vs 302",
+        "GET for state change"
+      ],
+      "questions": [
+        {"q": "Status classes?", "a": "2xx success, 3xx redirect, 4xx client error, 5xx server error"},
+        {"q": "Idempotent methods?", "a": "GET, PUT, DELETE, HEAD (not POST)"}
+      ]
+    },
+    {
+      "topic_id": "CN_TLS_CRYPTO",
+      "name": "TLS and Basic Cryptography",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": [
+        "CN_HTTP_HTTPS"
+      ],
+      "definition": "Confidentiality, integrity, authentication via crypto and TLS",
+      "concepts": [
+        "symmetric vs asymmetric",
+        "hash function",
+        "digital signature and certificate chain",
+        "session key"
+      ],
+      "common_mistakes": [
+        "asymmetric for bulk data",
+        "encryption vs hashing",
+        "trusting cert without chain/name check"
+      ],
+      "questions": [
+        {"q": "Why asymmetric only for setup?", "a": "Slow; used to authenticate and agree a secret, then symmetric for data"},
+        {"q": "Hashing vs encryption?", "a": "Hash is one-way integrity; encryption reversible with key"}
+      ]
+    },
+    {
+      "topic_id": "CN_APP_PROTOCOLS",
+      "name": "Email and Common Application Protocols",
+      "difficulty": "beginner",
+      "importance": "medium",
+      "hours": 3,
+      "prerequisites": [
+        "CN_TCP_UDP",
+        "CN_DHCP_DNS"
+      ],
+      "definition": "SMTP, POP3, IMAP, FTP, SSH, Telnet",
+      "concepts": [
+        "SMTP push vs IMAP/POP pull",
+        "well-known ports",
+        "FTP control/data",
+        "secure variants"
+      ],
+      "common_mistakes": [
+        "SMTP retrieves mail",
+        "FTPS vs SFTP",
+        "ports without roles"
+      ],
+      "questions": [
+        {"q": "Send vs retrieve email?", "a": "SMTP sends; POP3/IMAP retrieve"},
+        {"q": "Ports HTTP, HTTPS, DNS, SSH?", "a": "80, 443, 53, 22"}
+      ]
+    },
+    {
+      "topic_id": "CN_NAT_FW_PROXY_VPN",
+      "name": "NAT, Firewalls, Proxies, VPN",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 4,
+      "prerequisites": [
+        "CN_SUBNETTING_CIDR",
+        "CN_TCP_UDP"
+      ],
+      "definition": "Address sharing, filtering, mediation, secure tunnels",
+      "concepts": [
+        "NAT/PAT table",
+        "stateful inspection",
+        "forward vs reverse proxy",
+        "tunnel"
+      ],
+      "common_mistakes": [
+        "NAT is security",
+        "VPN means anonymity",
+        "proxy direction"
+      ],
+      "questions": [
+        {"q": "How does PAT separate replies?", "a": "Rewrites source IP/port to unique public ports tracked in table"},
+        {"q": "Forward vs reverse proxy?", "a": "Forward acts for clients; reverse fronts servers (balancing, caching)"}
+      ]
+    },
+    {
+      "topic_id": "CN_PERFORMANCE",
+      "name": "Network Performance: Latency, Bandwidth, Loss",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "CN_TCP_UDP"
+      ],
+      "definition": "Quantifying speed and reliability",
+      "concepts": [
+        "transmission delay L/R",
+        "propagation delay d/s",
+        "queueing and processing",
+        "bandwidth-delay product"
+      ],
+      "common_mistakes": [
+        "bits vs bytes",
+        "ignoring propagation",
+        "bandwidth always lowers latency"
+      ],
+      "questions": [
+        {"q": "10 MB over 100 Mbps?", "a": "0.8 s"},
+        {"q": "BDP 100 Mbps, RTT 40 ms?", "a": "4 Mbit (500 KB)"}
+      ]
+    },
+    {
+      "topic_id": "CN_TROUBLESHOOTING",
+      "name": "Common Networking Troubleshooting",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "CN_ARP_ICMP",
+        "CN_DHCP_DNS",
+        "CN_HTTP_HTTPS",
+        "CN_PERFORMANCE"
+      ],
+      "definition": "Layered fault isolation with standard tools",
+      "concepts": [
+        "layered diagnosis",
+        "reachability vs name resolution",
+        "ping, traceroute, dig, curl, ss"
+      ],
+      "common_mistakes": [
+        "testing names when DNS fails",
+        "ping success = app success",
+        "changing many things"
+      ],
+      "questions": [
+        {"q": "Ping 8.8.8.8 works, google.com not?", "a": "DNS failing; check resolver, dig against another"},
+        {"q": "Local ok, Internet not?", "a": "Check default gateway, routes, then NAT/upstream"}
+      ]
+    }
+  ]
+}

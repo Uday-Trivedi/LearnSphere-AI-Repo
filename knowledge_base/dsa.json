@@ -1,0 +1,508 @@
+{
+  "subject_id": "DSA",
+  "subject_name": "Data Structures and Algorithms",
+  "version": "1.0-condensed",
+  "source_note": "Striver A2Z module names used as organisational reference only; content original",
+  "total_topics": 35,
+  "total_hours": 214,
+  "meta": {
+    "revision_intervals_days": [1, 3, 7, 14, 30],
+    "mastery_levels": ["not_started", "learning", "practicing", "revision_needed", "mastered"],
+    "mastery_rule": "mastered = two assessments on different days scoring >= 0.8; drop to revision_needed if a revision scores < 0.7",
+    "prerequisite_rule": "start a topic only when all prerequisites are mastered, or practicing with latest score >= 0.7",
+    "question_weights": {"easy": 1, "medium": 2, "hard": 3}
+  },
+  "topics": [
+    {
+      "topic_id": "DSA_FUNDAMENTALS",
+      "name": "Programming Fundamentals and Basic Mathematics",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [],
+      "concepts": ["loops and nested loops", "functions and parameter passing", "integer division and modulo", "pattern printing"],
+      "common_mistakes": ["off-by-one bounds", "integer overflow", "mutating loop variable in body"],
+      "questions": [
+        {"q": "What does n % 10 give?", "a": "Last digit of n"},
+        {"q": "Steps to reverse digits of n?", "a": "rev=0; while n>0: rev=rev*10+n%10; n=n/10"}
+      ]
+    },
+    {
+      "topic_id": "DSA_COMPLEXITY",
+      "name": "Complexity Analysis",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 3,
+      "prerequisites": ["DSA_FUNDAMENTALS"],
+      "concepts": ["Big-O, Omega, Theta", "best/average/worst case", "recursion stack space", "constraint-to-complexity mapping"],
+      "common_mistakes": ["counting constants", "ignoring recursion stack", "treating average as worst"],
+      "questions": [
+        {"q": "Two sequential loops of n each?", "a": "O(n)"},
+        {"q": "Loop with i*=2 until n?", "a": "O(log n)"},
+        {"q": "Is O(n^2) safe for n=1e5?", "a": "No, 1e10 ops; aim for O(n log n)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BASIC_MATHS",
+      "name": "Number Theory Basics",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 4,
+      "prerequisites": ["DSA_FUNDAMENTALS"],
+      "concepts": ["divisors up to sqrt(n)", "Euclidean algorithm", "Sieve of Eratosthenes", "modular exponentiation"],
+      "common_mistakes": ["looping to n instead of sqrt(n)", "overflow before modulo", "negative modulo"],
+      "questions": [
+        {"q": "Why check divisors only up to sqrt(n)?", "a": "Divisors pair as (d, n/d); one is <= sqrt(n)"},
+        {"q": "gcd(48,18)?", "a": "6"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BASIC_RECURSION",
+      "name": "Basic Recursion",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": ["DSA_FUNDAMENTALS", "DSA_COMPLEXITY"],
+      "concepts": ["base case", "recursive case", "call stack depth", "recurrence relations"],
+      "common_mistakes": ["missing base case", "input not shrinking", "unnoticed overlapping subproblems"],
+      "questions": [
+        {"q": "No reachable base case?", "a": "Infinite recursion, stack overflow"},
+        {"q": "Naive fib(n) time?", "a": "Exponential, about O(2^n)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_HASHING",
+      "name": "Hashing",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": ["DSA_FUNDAMENTALS", "DSA_COMPLEXITY"],
+      "concepts": ["hash function", "collision handling (chaining, open addressing)", "load factor", "ordered vs unordered maps"],
+      "common_mistakes": ["assuming worst-case O(1)", "mutable keys", "relying on iteration order"],
+      "questions": [
+        {"q": "Average lookup time in hash map?", "a": "O(1)"},
+        {"q": "First non-repeating char?", "a": "Frequency map then second pass in original order, O(n)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_SORTING_BASIC",
+      "name": "Basic Sorting Algorithms",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": ["DSA_COMPLEXITY"],
+      "concepts": ["selection, bubble, insertion sort", "stability", "in-place", "adaptive behaviour"],
+      "common_mistakes": ["wrong inner bounds", "forgetting early exit", "confusing stable with in-place"],
+      "questions": [
+        {"q": "Which is O(n) on sorted input?", "a": "Bubble (early exit) and insertion"},
+        {"q": "Is selection sort stable?", "a": "Not in usual swap form"}
+      ]
+    },
+    {
+      "topic_id": "DSA_SORTING_DC",
+      "name": "Merge Sort and Quick Sort",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": ["DSA_SORTING_BASIC", "DSA_BASIC_RECURSION"],
+      "concepts": ["merge step", "partition and pivot", "T(n)=2T(n/2)+O(n)", "counting inversions"],
+      "common_mistakes": ["merge index errors", "naive pivot on sorted input", "allocating inside recursion"],
+      "questions": [
+        {"q": "Quick sort worst case and fix?", "a": "O(n^2); random or median-of-three pivot"},
+        {"q": "Solve T(n)=2T(n/2)+n", "a": "O(n log n)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_ARRAYS_BASICS",
+      "name": "Arrays: Fundamentals and Traversal",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": ["DSA_FUNDAMENTALS"],
+      "concepts": ["indexing", "in-place modification", "rotation and reversal", "dynamic arrays"],
+      "common_mistakes": ["index out of bounds", "overwriting before reading", "empty array"],
+      "questions": [
+        {"q": "Time to access arr[i]?", "a": "O(1)"},
+        {"q": "Rotate by k in O(1) extra space?", "a": "Reverse all, then reverse first k and rest (k mod n), O(n)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_ARRAYS_PATTERNS",
+      "name": "Array Patterns: Prefix Sums, Kadane, Two-Pass",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 8,
+      "prerequisites": ["DSA_ARRAYS_BASICS", "DSA_HASHING"],
+      "concepts": ["prefix sum", "Kadane", "Dutch national flag", "next permutation", "majority voting"],
+      "common_mistakes": ["bad reset for all-negative arrays", "prefix off-by-one", "missing empty-prefix entry"],
+      "questions": [
+        {"q": "Count subarrays with sum k in O(n)?", "a": "Prefix sum + frequency map, add map[prefix-k], seed map {0:1}"},
+        {"q": "Kadane on [-2,1,-3,4,-1,2,1,-5,4]?", "a": "6 ([4,-1,2,1])"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BINARY_SEARCH_1D",
+      "name": "Binary Search on Sorted Arrays",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": ["DSA_ARRAYS_BASICS", "DSA_COMPLEXITY"],
+      "concepts": ["search invariant", "lower and upper bound", "first/last occurrence", "overflow-safe mid"],
+      "common_mistakes": ["infinite loop from mid update", "(lo+hi)/2 overflow", "unsorted data"],
+      "questions": [
+        {"q": "Complexity and precondition?", "a": "O(log n); sorted or monotonic predicate"},
+        {"q": "Count occurrences of x?", "a": "upper_bound(x) - lower_bound(x)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BINARY_SEARCH_VARIATIONS",
+      "name": "Binary Search Variations: Rotated, Peak, 2D",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": ["DSA_BINARY_SEARCH_1D"],
+      "concepts": ["identify sorted half", "peak finding by slope", "2D to 1D index mapping"],
+      "common_mistakes": ["duplicates breaking half choice", "strict vs non-strict compare", "row/col mix-up"],
+      "questions": [
+        {"q": "Which half is sorted in rotated array?", "a": "If arr[lo]<=arr[mid], left half"},
+        {"q": "Why do duplicates hurt?", "a": "arr[lo]==arr[mid]==arr[hi] is ambiguous; shrink by one, O(n) worst"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BINARY_SEARCH_ANSWER",
+      "name": "Binary Search on the Answer Space",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 6,
+      "prerequisites": ["DSA_BINARY_SEARCH_1D", "DSA_ARRAYS_PATTERNS"],
+      "concepts": ["monotonic predicate", "minimize the maximum", "answer range bounds"],
+      "common_mistakes": ["wrong lo/hi", "non-monotonic predicate", "returning mid not boundary"],
+      "questions": [
+        {"q": "Property of feasibility function?", "a": "Monotonic (true stays true as candidate grows, or reverse)"},
+        {"q": "Split array into k parts minimizing largest sum?", "a": "Search cap in [max(arr), sum(arr)], greedy piece count"}
+      ]
+    },
+    {
+      "topic_id": "DSA_STRINGS_BASIC",
+      "name": "Strings: Basic and Medium",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": ["DSA_ARRAYS_BASICS", "DSA_HASHING"],
+      "concepts": ["immutability", "character frequency", "palindromes", "string building"],
+      "common_mistakes": ["quadratic concatenation", "case/whitespace rules", "empty strings"],
+      "questions": [
+        {"q": "Why is concatenating in a loop slow?", "a": "Immutable copies give O(n^2); use a builder"},
+        {"q": "Anagram check in O(n)?", "a": "Compare frequency counts"}
+      ]
+    },
+    {
+      "topic_id": "DSA_LINKED_LIST_BASICS",
+      "name": "Linked Lists: Fundamentals",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": ["DSA_ARRAYS_BASICS"],
+      "concepts": ["node and pointer", "head and tail", "dummy node", "singly vs doubly linked"],
+      "common_mistakes": ["losing rest of list", "null dereference", "not updating head/tail"],
+      "questions": [
+        {"q": "Access k-th node?", "a": "O(k), O(n) worst"},
+        {"q": "Why a dummy head?", "a": "Removes head special cases"}
+      ]
+    },
+    {
+      "topic_id": "DSA_LINKED_LIST_PATTERNS",
+      "name": "Linked List Patterns: Fast-Slow, Reversal",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 7,
+      "prerequisites": ["DSA_LINKED_LIST_BASICS"],
+      "concepts": ["Floyd cycle detection", "in-place reversal", "gap pointers", "merge pointers"],
+      "common_mistakes": ["wrong fast null checks", "breaking links before saving next", "off-by-one n-th from end"],
+      "questions": [
+        {"q": "Why do slow/fast meet in a cycle?", "a": "Fast gains one node per step, gap closes to 0"},
+        {"q": "Reverse 1->2->3?", "a": "Save next, curr.next=prev, advance; result 3->2->1"}
+      ]
+    },
+    {
+      "topic_id": "DSA_RECURSION_SUBSEQ",
+      "name": "Recursion: Subsequences, Subsets, Combinations",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 6,
+      "prerequisites": ["DSA_BASIC_RECURSION"],
+      "concepts": ["pick or not-pick", "recursion tree", "skip duplicates", "pruning"],
+      "common_mistakes": ["not undoing shared state", "duplicate outputs", "underestimating 2^n"],
+      "questions": [
+        {"q": "Subsets of n elements?", "a": "2^n"},
+        {"q": "Avoid duplicate subsets?", "a": "Sort, skip equal elements at same depth"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BACKTRACKING",
+      "name": "Backtracking",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 7,
+      "prerequisites": ["DSA_RECURSION_SUBSEQ"],
+      "concepts": ["state and undo", "constraint checking", "pruning", "search space size"],
+      "common_mistakes": ["forgetting undo", "late constraint checks", "copying instead of references"],
+      "questions": [
+        {"q": "Backtracking template?", "a": "Choose, explore, un-choose"},
+        {"q": "O(1) N-Queens check?", "a": "Track columns and diagonals (r-c, r+c)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BIT_MANIPULATION",
+      "name": "Bit Manipulation",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": ["DSA_FUNDAMENTALS"],
+      "concepts": ["two's complement", "bitwise operators", "XOR properties", "bitmask subsets"],
+      "common_mistakes": ["operator precedence", "signed shift", "1<<k overflow"],
+      "questions": [
+        {"q": "x XOR x and x XOR 0?", "a": "0 and x"},
+        {"q": "Power of two test?", "a": "n>0 and (n & (n-1)) == 0"}
+      ]
+    },
+    {
+      "topic_id": "DSA_STACK_QUEUE_BASICS",
+      "name": "Stacks and Queues: Fundamentals",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 4,
+      "prerequisites": ["DSA_ARRAYS_BASICS", "DSA_LINKED_LIST_BASICS"],
+      "concepts": ["LIFO and FIFO", "circular queue", "deque", "infix/prefix/postfix"],
+      "common_mistakes": ["pop from empty", "circular full/empty ambiguity", "postfix operand order"],
+      "questions": [
+        {"q": "Which structure matches brackets?", "a": "Stack, latest opener matches next closer"},
+        {"q": "Queue from two stacks?", "a": "Push to input; when output empty move all; pop output (amortized O(1))"}
+      ]
+    },
+    {
+      "topic_id": "DSA_STACK_PATTERNS",
+      "name": "Monotonic Stack and Queue Patterns",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 7,
+      "prerequisites": ["DSA_STACK_QUEUE_BASICS"],
+      "concepts": ["monotonic stack", "amortized O(n)", "previous/next smaller", "monotonic deque"],
+      "common_mistakes": ["wrong direction", "pushing values not indices", "not flushing at end"],
+      "questions": [
+        {"q": "Why O(n)?", "a": "Each element pushed once, popped at most once"},
+        {"q": "Next greater of [2,1,5,3]?", "a": "[5,5,-1,-1]"}
+      ]
+    },
+    {
+      "topic_id": "DSA_SLIDING_WINDOW",
+      "name": "Sliding Window and Two Pointers",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 7,
+      "prerequisites": ["DSA_ARRAYS_BASICS", "DSA_HASHING"],
+      "concepts": ["window invariant", "expand and shrink", "opposite-end pointers", "frequency map in window"],
+      "common_mistakes": ["bad shrink condition", "answer updated at wrong time", "negatives break monotonicity"],
+      "questions": [
+        {"q": "When does variable window fail?", "a": "Negative numbers, sum no longer monotonic"},
+        {"q": "Longest substring without repeats?", "a": "Expand right, move left past repeat, track max, O(n)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_HEAPS",
+      "name": "Heaps and Priority Queues",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 6,
+      "prerequisites": ["DSA_ARRAYS_BASICS", "DSA_SORTING_DC"],
+      "concepts": ["heap property", "sift up/down", "build-heap O(n)", "top-k and merge-k"],
+      "common_mistakes": ["wrong index formulas", "max heap where min heap of size k needed", "build-heap is not O(n log n) tight"],
+      "questions": [
+        {"q": "Children of node i (0-based)?", "a": "2i+1 and 2i+2"},
+        {"q": "K largest of n?", "a": "Min heap of size k, O(n log k)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_GREEDY",
+      "name": "Greedy Algorithms",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 7,
+      "prerequisites": ["DSA_SORTING_DC", "DSA_ARRAYS_PATTERNS"],
+      "concepts": ["greedy choice property", "exchange argument", "sorting as preprocessing", "counterexamples"],
+      "common_mistakes": ["assuming greedy without proof", "wrong sort key", "greedy on 0/1 knapsack"],
+      "questions": [
+        {"q": "Greedy for fractional but not 0/1 knapsack?", "a": "Items divisible only in fractional, enabling exchange argument"},
+        {"q": "Activity selection key?", "a": "Sort by finish time"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BINARY_TREES_BASICS",
+      "name": "Binary Trees: Fundamentals and Traversals",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 6,
+      "prerequisites": ["DSA_BASIC_RECURSION", "DSA_STACK_QUEUE_BASICS"],
+      "concepts": ["root/leaf/height/depth", "DFS vs BFS", "iterative traversal", "level order"],
+      "common_mistakes": ["mixing height and depth", "missing null base case", "level size not captured"],
+      "questions": [
+        {"q": "Inorder of root 2, left 1, right 3?", "a": "1,2,3"},
+        {"q": "Space of recursive DFS?", "a": "O(h)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BINARY_TREES_PATTERNS",
+      "name": "Binary Tree Problem Patterns",
+      "difficulty": "advanced",
+      "importance": "critical",
+      "hours": 8,
+      "prerequisites": ["DSA_BINARY_TREES_BASICS"],
+      "concepts": ["return values vs global state", "root-to-leaf paths", "tree construction", "LCA"],
+      "common_mistakes": ["updating answer in wrong place", "path through node vs to ancestor", "skewed trees"],
+      "questions": [
+        {"q": "Diameter in O(n)?", "a": "Post-order returning height; update answer with left+right height"},
+        {"q": "Why need inorder to rebuild?", "a": "Inorder locates the left/right split"}
+      ]
+    },
+    {
+      "topic_id": "DSA_BST",
+      "name": "Binary Search Trees",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 6,
+      "prerequisites": ["DSA_BINARY_TREES_BASICS"],
+      "concepts": ["BST property", "inorder is sorted", "successor/predecessor", "balance"],
+      "common_mistakes": ["validating only against parent", "delete with two children", "assuming O(log n)"],
+      "questions": [
+        {"q": "Why left<node<right check insufficient?", "a": "Constraint applies to whole subtree; use min/max bounds"},
+        {"q": "Worst-case search?", "a": "O(n) for skewed tree"}
+      ]
+    },
+    {
+      "topic_id": "DSA_GRAPH_BASICS",
+      "name": "Graphs: Representation, BFS and DFS",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 7,
+      "prerequisites": ["DSA_BINARY_TREES_BASICS", "DSA_STACK_QUEUE_BASICS"],
+      "concepts": ["adjacency list vs matrix", "visited array", "multi-source BFS", "connected components"],
+      "common_mistakes": ["missing visited", "marking visited at pop in BFS", "missing components"],
+      "questions": [
+        {"q": "BFS complexity?", "a": "O(V+E)"},
+        {"q": "Shortest path in unweighted graph?", "a": "BFS, level order equals distance"}
+      ]
+    },
+    {
+      "topic_id": "DSA_GRAPH_ALGORITHMS",
+      "name": "Graph Algorithms: Topo Sort, Shortest Paths, MST, DSU",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 12,
+      "prerequisites": ["DSA_GRAPH_BASICS", "DSA_HEAPS"],
+      "concepts": ["DAG", "relaxation", "non-negative weights", "union by rank and path compression"],
+      "common_mistakes": ["Dijkstra with negative edges", "no cycle check in topo sort", "skipping path compression"],
+      "questions": [
+        {"q": "When does Dijkstra fail?", "a": "Negative edge weights"},
+        {"q": "Dijkstra with binary heap?", "a": "O((V+E) log V)"}
+      ]
+    },
+    {
+      "topic_id": "DSA_DP_FOUNDATIONS",
+      "name": "Dynamic Programming: Foundations, 1D/Grid",
+      "difficulty": "advanced",
+      "importance": "critical",
+      "hours": 8,
+      "prerequisites": ["DSA_BASIC_RECURSION", "DSA_RECURSION_SUBSEQ"],
+      "concepts": ["state definition", "transition", "base cases", "memoization vs tabulation", "space optimization"],
+      "common_mistakes": ["state missing info", "wrong base case", "wrong memo dimensions"],
+      "questions": [
+        {"q": "Two DP properties?", "a": "Overlapping subproblems, optimal substructure"},
+        {"q": "Min path sum state?", "a": "dp[i][j]=grid[i][j]+min(dp[i-1][j],dp[i][j-1])"}
+      ]
+    },
+    {
+      "topic_id": "DSA_DP_SUBSEQ_KNAPSACK",
+      "name": "DP on Subsequences and Knapsack",
+      "difficulty": "advanced",
+      "importance": "critical",
+      "hours": 9,
+      "prerequisites": ["DSA_DP_FOUNDATIONS"],
+      "concepts": ["index plus target state", "take or skip", "unbounded reuse", "counting vs optimization"],
+      "common_mistakes": ["wrong loop direction in 1D", "combinations vs permutations", "overflow"],
+      "questions": [
+        {"q": "Why capacity loop downward in 0/1 1D?", "a": "Avoids reusing item; reads previous-item values"},
+        {"q": "0/1 knapsack cost?", "a": "O(nW) time, O(W) space"}
+      ]
+    },
+    {
+      "topic_id": "DSA_DP_STRINGS_SEQUENCES",
+      "name": "DP on Strings and Sequences",
+      "difficulty": "advanced",
+      "importance": "high",
+      "hours": 9,
+      "prerequisites": ["DSA_DP_FOUNDATIONS"],
+      "concepts": ["dp[i][j] over two strings", "match/mismatch transitions", "patience sorting LIS", "reconstruction"],
+      "common_mistakes": ["subsequence vs substring recurrence", "1-indexed off-by-one", "wrong path rebuild"],
+      "questions": [
+        {"q": "LCS recurrence?", "a": "Match: 1+dp[i-1][j-1]; else max(dp[i-1][j],dp[i][j-1])"},
+        {"q": "LIS in O(n log n)?", "a": "tails array with binary search"}
+      ]
+    },
+    {
+      "topic_id": "DSA_DP_ADVANCED",
+      "name": "Advanced DP: Stocks, Partitions, Bitmask",
+      "difficulty": "advanced",
+      "importance": "medium",
+      "hours": 8,
+      "prerequisites": ["DSA_DP_SUBSEQ_KNAPSACK", "DSA_DP_STRINGS_SEQUENCES"],
+      "concepts": ["state machine DP", "interval DP", "bitmask states", "tree DP overview"],
+      "common_mistakes": ["excess state dimensions", "wrong interval order", "bitmask for n>~20"],
+      "questions": [
+        {"q": "Why interval DP by increasing length?", "a": "Larger intervals depend on smaller ones"},
+        {"q": "Bitmask states?", "a": "2^n"}
+      ]
+    },
+    {
+      "topic_id": "DSA_TRIES",
+      "name": "Tries",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 5,
+      "prerequisites": ["DSA_STRINGS_BASIC", "DSA_BINARY_TREES_BASICS"],
+      "concepts": ["prefix tree node", "end-of-word flag", "alphabet-size tradeoff", "XOR trie"],
+      "common_mistakes": ["missing end flag", "memory with large alphabets", "prefix vs word confusion"],
+      "questions": [
+        {"q": "Insert word of length L?", "a": "O(L)"},
+        {"q": "Trie over hash set when?", "a": "Prefix queries or lexicographic traversal"}
+      ]
+    },
+    {
+      "topic_id": "DSA_STRING_ALGOS_ADVANCED",
+      "name": "Advanced String Algorithms",
+      "difficulty": "advanced",
+      "importance": "medium",
+      "hours": 6,
+      "prerequisites": ["DSA_STRINGS_BASIC", "DSA_HASHING"],
+      "concepts": ["LPS array (KMP)", "rolling hash", "Z-array", "Manacher overview"],
+      "common_mistakes": ["wrong LPS fallback", "bad hash base/modulus", "skipping collision verification"],
+      "questions": [
+        {"q": "lps[i] meaning?", "a": "Longest proper prefix of pattern[0..i] that is also suffix"},
+        {"q": "Why verify Rabin-Karp matches?", "a": "Hash collisions"}
+      ]
+    },
+    {
+      "topic_id": "DSA_ADVANCED_PATTERNS",
+      "name": "Advanced Interview Patterns",
+      "difficulty": "advanced",
+      "importance": "medium",
+      "hours": 8,
+      "prerequisites": ["DSA_ARRAYS_PATTERNS", "DSA_SLIDING_WINDOW", "DSA_GRAPH_ALGORITHMS", "DSA_DP_FOUNDATIONS", "DSA_HEAPS"],
+      "concepts": ["pattern recognition", "sweep line", "range query structures", "LRU cache design"],
+      "common_mistakes": ["coding before reading constraints", "not merging intervals", "segment tree indexing"],
+      "questions": [
+        {"q": "LRU cache with O(1) ops?", "a": "Hash map to nodes + doubly linked list by recency"},
+        {"q": "Segment tree costs?", "a": "O(log n) query and point update"}
+      ]
+    }
+  ]
+}

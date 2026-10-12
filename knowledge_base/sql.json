@@ -1,0 +1,537 @@
+{
+  "subject_id": "SQL_DBMS",
+  "subject_name": "SQL and Database Management Systems",
+  "version": "1.0-condensed",
+  "source_note": "Compiled standard DBMS and SQL curriculum; sample schema: departments(dept_id, dept_name), employees(emp_id, name, dept_id, salary, manager_id)",
+  "total_topics": 20,
+  "total_hours": 77,
+  "meta": {
+    "revision_intervals_days": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ],
+    "mastery_levels": [
+      "not_started",
+      "learning",
+      "practicing",
+      "revision_needed",
+      "mastered"
+    ],
+    "mastery_rule": "mastered = two assessments on different days scoring >= 0.8; drop to revision_needed if a revision scores < 0.7",
+    "prerequisite_rule": "start a topic only when all prerequisites are mastered, or practicing with latest score >= 0.7",
+    "question_weights": {"easy": 1, "medium": 2, "hard": 3}
+  },
+  "topics": [
+    {
+      "topic_id": "SQL_DBMS_DB_CONCEPTS",
+      "name": "Database Concepts and DBMS Architecture",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+
+      ],
+      "concepts": [
+        "data models",
+        "schema vs instance",
+        "physical and logical data independence",
+        "three-schema architecture"
+      ],
+      "common_mistakes": [
+        "database = DBMS",
+        "NoSQL means no schema",
+        "ignoring concurrency/recovery"
+      ],
+      "questions": [
+        {"q": "Two file-storage problems solved by DBMS?", "a": "Redundancy/inconsistency and no concurrent access control"},
+        {"q": "Physical vs logical independence?", "a": "Change storage without changing schema; change schema without changing views"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_RELATIONAL_MODEL_KEYS",
+      "name": "Relational Model, Keys, Constraints",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_DB_CONCEPTS"
+      ],
+      "concepts": [
+        "candidate/primary/alternate/foreign keys",
+        "entity, referential, domain integrity",
+        "NOT NULL, UNIQUE, CHECK, DEFAULT",
+        "referential actions"
+      ],
+      "common_mistakes": [
+        "many primary keys",
+        "UNIQUE = PRIMARY KEY",
+        "foreign key cannot be NULL"
+      ],
+      "questions": [
+        {"q": "Candidate vs primary key?", "a": "Candidate is any minimal unique set; primary is the chosen one"},
+        {"q": "Can FK be NULL?", "a": "Yes unless NOT NULL"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_ER_MODELING",
+      "name": "ER Modeling and Relationships",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "SQL_DBMS_RELATIONAL_MODEL_KEYS"
+      ],
+      "concepts": [
+        "cardinality and participation",
+        "weak entity",
+        "junction table",
+        "ER to relational mapping"
+      ],
+      "common_mistakes": [
+        "FK on wrong side",
+        "M:N in one column",
+        "ignoring participation"
+      ],
+      "questions": [
+        {"q": "Map M:N Students-Courses?", "a": "Junction table with composite PK and two FKs"},
+        {"q": "FK in 1:N Dept-Employee?", "a": "On the N side (Employee)"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_NORMALIZATION",
+      "name": "Functional Dependencies and Normalization",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "SQL_DBMS_RELATIONAL_MODEL_KEYS"
+      ],
+      "concepts": [
+        "attribute closure",
+        "partial and transitive dependency",
+        "1NF to BCNF",
+        "lossless decomposition"
+      ],
+      "common_mistakes": [
+        "2NF without partial dependency check",
+        "forgetting prime attributes in 3NF",
+        "losing dependencies"
+      ],
+      "questions": [
+        {"q": "R(A,B,C) A->B, B->C: closure, key, NF?", "a": "A+={A,B,C}; key A; 2NF not 3NF"},
+        {"q": "BCNF vs 3NF?", "a": "BCNF needs every determinant a superkey; stricter"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_TRANSACTIONS_ACID",
+      "name": "Transactions and ACID",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_RELATIONAL_MODEL_KEYS"
+      ],
+      "concepts": [
+        "atomicity, consistency, isolation, durability",
+        "commit/rollback/savepoint",
+        "write-ahead logging",
+        "auto-commit"
+      ],
+      "common_mistakes": [
+        "consistency = isolation",
+        "ignoring auto-commit",
+        "rolling back committed work"
+      ],
+      "questions": [
+        {"q": "Both updates or neither in a transfer?", "a": "Atomicity"},
+        {"q": "How is durability ensured?", "a": "Write-ahead log on stable storage before commit, redo after crash"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_ISOLATION_CONCURRENCY",
+      "name": "Isolation Levels and Concurrency Anomalies",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_TRANSACTIONS_ACID"
+      ],
+      "concepts": [
+        "dirty, non-repeatable, phantom reads",
+        "READ UNCOMMITTED to SERIALIZABLE",
+        "MVCC",
+        "lost update"
+      ],
+      "common_mistakes": [
+        "memorising table without reasons",
+        "same defaults everywhere",
+        "SERIALIZABLE is free"
+      ],
+      "questions": [
+        {"q": "Anomalies under READ COMMITTED?", "a": "Non-repeatable and phantom reads"},
+        {"q": "Phantom read?", "a": "Repeated range query sees new committed rows"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_LOCKS_DEADLOCKS",
+      "name": "Locks and Database Deadlocks",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "SQL_DBMS_ISOLATION_CONCURRENCY"
+      ],
+      "concepts": [
+        "shared vs exclusive",
+        "lock granularity",
+        "two-phase locking",
+        "wait-for graph"
+      ],
+      "common_mistakes": [
+        "long open transactions",
+        "inconsistent lock order",
+        "2PL prevents deadlock"
+      ],
+      "questions": [
+        {"q": "Does 2PL prevent deadlocks?", "a": "No, it guarantees serializability only"},
+        {"q": "Reduce recurring deadlocks?", "a": "Consistent access order, short transactions, retry victim"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_INDEXES_OPTIMIZATION",
+      "name": "Indexes, Query Optimization, Execution Plans",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 5,
+      "prerequisites": [
+        "SQL_DBMS_RELATIONAL_MODEL_KEYS"
+      ],
+      "concepts": [
+        "B-tree index",
+        "composite index leftmost prefix",
+        "covering index",
+        "SARGable predicates",
+        "EXPLAIN"
+      ],
+      "common_mistakes": [
+        "indexing every column",
+        "functions on indexed columns",
+        "ignoring write overhead"
+      ],
+      "questions": [
+        {"q": "Why does YEAR(order_date)=2025 block index?", "a": "Function on column; use range order_date >= '2025-01-01' AND < '2026-01-01'"},
+        {"q": "Leftmost prefix on (a,b,c)?", "a": "Supports a; a,b; a,b,c; not b or c alone"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_DATA_TYPES_DDL",
+      "name": "SQL Data Types and DDL",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_RELATIONAL_MODEL_KEYS"
+      ],
+      "concepts": [
+        "numeric, character, date/time types",
+        "constraints in DDL",
+        "identity/auto-increment",
+        "DDL vs DML"
+      ],
+      "common_mistakes": [
+        "FLOAT for money",
+        "DROP vs DELETE vs TRUNCATE",
+        "vendor-identical syntax"
+      ],
+      "questions": [
+        {"q": "DELETE vs TRUNCATE vs DROP?", "a": "DELETE removes filtered rows; TRUNCATE all rows keeping structure; DROP removes table"},
+        {"q": "Type for currency?", "a": "DECIMAL/NUMERIC"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_DML",
+      "name": "INSERT, UPDATE and DELETE",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "SQL_DBMS_DATA_TYPES_DDL"
+      ],
+      "concepts": [
+        "INSERT forms",
+        "UPDATE with WHERE",
+        "DELETE with WHERE",
+        "upsert (vendor specific)"
+      ],
+      "common_mistakes": [
+        "missing WHERE",
+        "constraint violations",
+        "stale reads"
+      ],
+      "questions": [
+        {"q": "UPDATE without WHERE?", "a": "Updates every row"},
+        {"q": "Copy rows between tables?", "a": "INSERT INTO t (cols) SELECT cols FROM s WHERE ..."}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_SELECT_FILTERING",
+      "name": "SELECT, Filtering, ORDER BY, DISTINCT, LIMIT",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_DATA_TYPES_DDL"
+      ],
+      "concepts": [
+        "logical order FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY",
+        "predicates (IN, BETWEEN, LIKE)",
+        "DISTINCT",
+        "LIMIT/TOP/FETCH FIRST"
+      ],
+      "common_mistakes": [
+        "alias in WHERE",
+        "AND/OR without parentheses",
+        "assuming order"
+      ],
+      "questions": [
+        {"q": "Why no alias in WHERE?", "a": "WHERE runs before SELECT"},
+        {"q": "Top 3 salaries?", "a": "ORDER BY salary DESC LIMIT 3 (TOP 3 in SQL Server)"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_AGGREGATION_GROUP_BY",
+      "name": "Aggregates, GROUP BY, HAVING",
+      "difficulty": "beginner",
+      "importance": "critical",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_SELECT_FILTERING"
+      ],
+      "concepts": [
+        "COUNT, SUM, AVG, MIN, MAX",
+        "GROUP BY",
+        "HAVING",
+        "NULLs in aggregates"
+      ],
+      "common_mistakes": [
+        "non-grouped columns",
+        "WHERE for aggregates",
+        "COUNT(col) ignores NULL"
+      ],
+      "questions": [
+        {"q": "WHERE vs HAVING?", "a": "WHERE filters rows before grouping; HAVING filters groups"},
+        {"q": "6 rows, one NULL dept: COUNT(*), COUNT(dept_id)?", "a": "6 and 5"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_JOINS",
+      "name": "Joins: INNER, LEFT, RIGHT, FULL, Self",
+      "difficulty": "intermediate",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "SQL_DBMS_SELECT_FILTERING"
+      ],
+      "concepts": [
+        "inner vs outer joins",
+        "self join",
+        "cross join",
+        "anti-join pattern"
+      ],
+      "common_mistakes": [
+        "WHERE on right table turns LEFT into INNER",
+        "missing join condition",
+        "ambiguous columns"
+      ],
+      "questions": [
+        {"q": "Departments with no employees?", "a": "LEFT JOIN employees ... WHERE e.emp_id IS NULL"},
+        {"q": "LEFT JOIN + WHERE on right table?", "a": "Removes NULL-padded rows; put condition in ON"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_SUBQUERIES",
+      "name": "Subqueries and Correlated Subqueries",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 4,
+      "prerequisites": [
+        "SQL_DBMS_JOINS",
+        "SQL_DBMS_AGGREGATION_GROUP_BY"
+      ],
+      "concepts": [
+        "scalar subquery",
+        "IN vs EXISTS",
+        "correlated subquery",
+        "NOT IN NULL trap"
+      ],
+      "common_mistakes": [
+        "NOT IN with NULLs",
+        "scalar returning many rows",
+        "correlated cost"
+      ],
+      "questions": [
+        {"q": "Above company average salary?", "a": "WHERE salary > (SELECT AVG(salary) FROM employees)"},
+        {"q": "NOT IN returns nothing?", "a": "Subquery NULL makes UNKNOWN; use NOT EXISTS"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_CTES",
+      "name": "Common Table Expressions",
+      "difficulty": "intermediate",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "SQL_DBMS_SUBQUERIES"
+      ],
+      "concepts": [
+        "WITH clause",
+        "recursive anchor and member",
+        "termination",
+        "CTE vs subquery vs temp table"
+      ],
+      "common_mistakes": [
+        "assuming materialised",
+        "no termination",
+        "use outside statement"
+      ],
+      "questions": [
+        {"q": "Recursive CTE parts?", "a": "Anchor member + recursive member (UNION ALL) with termination"},
+        {"q": "Does CTE persist?", "a": "No, single statement only"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_WINDOW_FUNCTIONS",
+      "name": "Window Functions",
+      "difficulty": "advanced",
+      "importance": "critical",
+      "hours": 5,
+      "prerequisites": [
+        "SQL_DBMS_AGGREGATION_GROUP_BY",
+        "SQL_DBMS_JOINS"
+      ],
+      "concepts": [
+        "OVER, PARTITION BY, ORDER BY",
+        "frame clause",
+        "ROW_NUMBER, RANK, DENSE_RANK",
+        "LAG, LEAD"
+      ],
+      "common_mistakes": [
+        "window in WHERE",
+        "RANK vs DENSE_RANK",
+        "no ORDER BY in ranking"
+      ],
+      "questions": [
+        {"q": "90,70,70,60 ranks?", "a": "RANK 1,2,2,4; DENSE_RANK 1,2,2,3; ROW_NUMBER 1,2,3,4"},
+        {"q": "Top per department?", "a": "DENSE_RANK() OVER (PARTITION BY dept_id ORDER BY salary DESC) in subquery, rank=1"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_CASE_NULL",
+      "name": "CASE Expressions and NULL Handling",
+      "difficulty": "beginner",
+      "importance": "high",
+      "hours": 3,
+      "prerequisites": [
+        "SQL_DBMS_SELECT_FILTERING"
+      ],
+      "concepts": [
+        "CASE WHEN",
+        "IS NULL",
+        "COALESCE and NULLIF",
+        "NULLs in sort/group"
+      ],
+      "common_mistakes": [
+        "using = NULL",
+        "CASE without ELSE gives NULL",
+        "NULL arithmetic"
+      ],
+      "questions": [
+        {"q": "salary = NULL gives?", "a": "UNKNOWN; use IS NULL"},
+        {"q": "Salary band label?", "a": "CASE WHEN salary>=80000 THEN 'High' WHEN salary>=60000 THEN 'Medium' ELSE 'Low' END"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_VIEWS",
+      "name": "Views",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 2,
+      "prerequisites": [
+        "SQL_DBMS_JOINS"
+      ],
+      "concepts": [
+        "virtual table",
+        "updatable views",
+        "materialized view",
+        "WITH CHECK OPTION"
+      ],
+      "common_mistakes": [
+        "view stores data",
+        "every view updatable",
+        "stacked slow views"
+      ],
+      "questions": [
+        {"q": "View vs materialized view?", "a": "View stores query; materialized stores result and needs refresh"},
+        {"q": "Two reasons for views?", "a": "Simplify queries, restrict access"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_STORED_PROCS_TRIGGERS",
+      "name": "Stored Procedures, Functions, Triggers",
+      "difficulty": "intermediate",
+      "importance": "medium",
+      "hours": 3,
+      "prerequisites": [
+        "SQL_DBMS_DML",
+        "SQL_DBMS_TRANSACTIONS_ACID"
+      ],
+      "concepts": [
+        "procedure vs function",
+        "BEFORE/AFTER/INSTEAD OF triggers",
+        "side effects",
+        "maintainability"
+      ],
+      "common_mistakes": [
+        "hidden trigger logic",
+        "recursive triggers",
+        "assuming portability"
+      ],
+      "questions": [
+        {"q": "Procedure vs function?", "a": "Function returns value usable in expressions; procedure called with CALL/EXEC"},
+        {"q": "Good AFTER UPDATE trigger use?", "a": "Audit logging of changes"}
+      ]
+    },
+    {
+      "topic_id": "SQL_DBMS_SQL_INTERVIEW_PATTERNS",
+      "name": "SQL Interview Query Patterns",
+      "difficulty": "advanced",
+      "importance": "critical",
+      "hours": 6,
+      "prerequisites": [
+        "SQL_DBMS_WINDOW_FUNCTIONS",
+        "SQL_DBMS_CTES",
+        "SQL_DBMS_CASE_NULL",
+        "SQL_DBMS_SUBQUERIES"
+      ],
+      "concepts": [
+        "nth highest",
+        "deduplication",
+        "consecutive records",
+        "anti-joins",
+        "pivot with CASE"
+      ],
+      "common_mistakes": [
+        "ties handled wrong",
+        "NULL/empty groups",
+        "DISTINCT hiding join duplicates"
+      ],
+      "questions": [
+        {"q": "Second highest distinct salary?", "a": "MAX(salary) WHERE salary < (SELECT MAX(salary)...) or DENSE_RANK()=2"},
+        {"q": "Duplicate names?", "a": "GROUP BY name HAVING COUNT(*) > 1"}
+      ]
+    }
+  ]
+}
